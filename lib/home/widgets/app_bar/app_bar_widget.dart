@@ -8,7 +8,7 @@ class AppBarWidget extends PreferredSize {
       : super(
             preferredSize: Size.fromHeight(250),
             child: Container(
-              height: 250,
+              height: 260,
               child: Stack(
                 children: [
                   Container(
@@ -41,7 +41,7 @@ class AppBarWidget extends PreferredSize {
                       ),
                     ),
                   ),
-                  Align(alignment: Alignment(0, 1.25), child: ScoreCardWidget())
+                  Align(alignment: Alignment(0, 1), child: ScoreCardWidget())
                 ],
               ),
             ));

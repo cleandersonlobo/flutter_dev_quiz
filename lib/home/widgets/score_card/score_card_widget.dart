@@ -12,33 +12,37 @@ class ScoreCardWidget extends StatelessWidget {
         height: 136,
         decoration: BoxDecoration(
             color: AppColors.white, borderRadius: BorderRadius.circular(15)),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: ChartWidget(),
-            ),
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Vamos Começar",
-                      style: AppTextStyles.heading,
-                    ),
-                    Text(
-                      "Complete os desafios e\navanceem conhecimento",
-                      style: AppTextStyles.body,
-                    )
-                  ],
-                ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 1,
+                child: ChartWidget(),
               ),
-            )
-          ],
+              Expanded(
+                flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Vamos Começar",
+                        style: AppTextStyles.heading,
+                      ),
+                      Text(
+                        "Complete os desafios e\navanceem conhecimento",
+                        style: AppTextStyles.body,
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
