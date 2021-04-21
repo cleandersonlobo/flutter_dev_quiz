@@ -14,7 +14,7 @@ class AppColors {
   //Greens
   static final Color lightGreen = Color(0xFFE1F5EC);
   static final Color green = Color(0xFFB8DBCB);
-  static final Color darkGreen = Color(0xFF04D361);
+  static final Color darkGreen = Color(0xFF03AB4F);
 
   //Reds
   static final Color lightRed = Color(0xFFF5E9EC);
@@ -60,4 +60,8 @@ class AppColors {
     "boderColor": AppColors.levelButtonBorderPerito,
     "fontColor": AppColors.levelButtonTextPerito
   };
+
+  //Button
+  static final Color primary = Color(0xFF04D361);
+  static final Color secondary = Color(0xFF04D361);
 }
