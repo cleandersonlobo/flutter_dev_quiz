@@ -37,9 +37,11 @@ class _ChallengePageState extends State<ChallengePage> {
   var indexSelected;
 
   void toggleAwnser(int index) {
-    setState(() {
-      indexSelected = index == indexSelected ? null : index;
-    });
+    if (!showAwnser) {
+      setState(() {
+        indexSelected = index == indexSelected ? null : index;
+      });
+    }
   }
 
   void confirmAwnser() {
