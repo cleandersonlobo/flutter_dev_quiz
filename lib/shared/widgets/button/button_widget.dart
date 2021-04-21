@@ -34,8 +34,9 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LimitedBox(
-      maxWidth: 164,
+    return Container(
+      width: double.infinity,
+      constraints: BoxConstraints(maxWidth: 164),
       child: Ink(
         decoration: BoxDecoration(
             color: buttonColor,
@@ -46,7 +47,6 @@ class ButtonWidget extends StatelessWidget {
           onTap: onPress,
           borderRadius: BorderRadius.circular(10),
           child: Container(
-            width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 14),
               child: Text(label,

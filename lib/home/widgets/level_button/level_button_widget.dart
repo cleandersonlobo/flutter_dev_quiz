@@ -27,10 +27,11 @@ class LebelButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LimitedBox(
-      maxWidth: 80,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 2),
+      width: double.infinity,
+      constraints: BoxConstraints(maxWidth: 80),
       child: Container(
-        width: double.infinity,
         decoration: BoxDecoration(
             color: color,
             border: Border.fromBorderSide(BorderSide(color: borderColor)),

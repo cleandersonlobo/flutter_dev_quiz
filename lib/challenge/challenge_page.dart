@@ -80,21 +80,33 @@ class _ChallengePageState extends State<ChallengePage> {
             ),
             Expanded(
                 flex: 0,
-                child: Container(
+                child: Padding(
                   padding:
-                      EdgeInsets.only(right: 20, left: 20, bottom: 24, top: 14),
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ButtonWidget(
-                        label: "Pular",
-                        variant: "light",
-                        onPress: () {},
+                      Expanded(
+                        flex: 1,
+                        child: ButtonWidget(
+                          label: "Pular",
+                          variant: "light",
+                          onPress: () {},
+                        ),
                       ),
-                      ButtonWidget(
-                        label: "Confirmar",
-                        variant: "primary",
-                        onPress: confirmAwnser,
+                      Expanded(
+                        flex: 0,
+                        child: SizedBox(
+                          width: 8,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: ButtonWidget(
+                          label: "Confirmar",
+                          variant: "primary",
+                          onPress: confirmAwnser,
+                        ),
                       )
                     ],
                   ),
