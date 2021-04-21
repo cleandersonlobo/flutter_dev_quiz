@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/core/core.dart';
+import 'package:flutter_dev_quiz/shared/widgets/progress_indicator/progress_indicator_widget.dart';
 
 const MOCK_QUIZ_CARDS = ([
   {
@@ -62,14 +63,9 @@ class QuizCardWidget extends StatelessWidget {
                         style: AppTextStyles.body11,
                       )),
                   Expanded(
-                      flex: 2,
-                      child: LinearProgressIndicator(
-                        minHeight: 4,
-                        value: 0.3,
-                        backgroundColor: AppColors.chartSecondary,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            AppColors.chartPrimary),
-                      ))
+                    flex: 2,
+                    child: ProgressIndicatorWidget(value: 0.3),
+                  ),
                 ],
               )
             ],
