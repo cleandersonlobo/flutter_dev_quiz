@@ -7,11 +7,9 @@ const TYPES_LEVEL = ["Fácil", "Médio", "Difícil", "Perito"];
 
 class LebelButtonWidget extends StatelessWidget {
   final String label;
-
-  LebelButtonWidget({
-    Key? key,
-    required this.label,
-  })   : assert(TYPES_LEVEL.contains(label)),
+  final onPress;
+  LebelButtonWidget({Key? key, required this.label, this.onPress})
+      : assert(TYPES_LEVEL.contains(label)),
         super(key: key);
 
   final buttonConfig = {
@@ -24,27 +22,31 @@ class LebelButtonWidget extends StatelessWidget {
   Color get color => buttonConfig[label]!["color"]!;
   Color get borderColor => buttonConfig[label]!["boderColor"]!;
   Color get fontColor => buttonConfig[label]!["fontColor"]!;
-
+  final BorderRadius borderRadius = BorderRadius.circular(28);
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 2),
       width: double.infinity,
       constraints: BoxConstraints(maxWidth: 80),
-      child: Container(
+      child: Ink(
         decoration: BoxDecoration(
             color: color,
             border: Border.fromBorderSide(BorderSide(color: borderColor)),
-            borderRadius: BorderRadius.circular(28)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
-          child: Text(label,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.notoSans(
-                fontWeight: FontWeight.w500,
-                color: fontColor,
-                fontSize: 13,
-              )),
+            borderRadius: borderRadius),
+        child: InkWell(
+          onTap: onPress,
+          borderRadius: borderRadius,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6),
+            child: Text(label,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.notoSans(
+                  fontWeight: FontWeight.w500,
+                  color: fontColor,
+                  fontSize: 13,
+                )),
+          ),
         ),
       ),
     );
