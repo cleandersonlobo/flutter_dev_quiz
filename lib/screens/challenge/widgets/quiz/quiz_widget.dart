@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dev_quiz/challenge/widgets/awnser/awnser_widget.dart';
+import 'package:flutter_dev_quiz/screens/challenge/widgets/awnser/awnser_widget.dart';
 import 'package:flutter_dev_quiz/core/app_text_styles.dart';
 
 class QuizWidget extends StatelessWidget {

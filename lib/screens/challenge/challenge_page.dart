@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dev_quiz/challenge/widgets/question_indicator/question_indicator_widget.dart';
-import 'package:flutter_dev_quiz/challenge/widgets/quiz/quiz_widget.dart';
+import 'package:flutter_dev_quiz/screens/challenge/widgets/question_indicator/question_indicator_widget.dart';
+import 'package:flutter_dev_quiz/screens/challenge/widgets/quiz/quiz_widget.dart';
 import 'package:flutter_dev_quiz/core/app_colors.dart';
 import 'package:flutter_dev_quiz/shared/widgets/button/button_widget.dart';
 
