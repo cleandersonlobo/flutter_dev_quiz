@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/core/core.dart';
+import 'package:flutter_dev_quiz/shared/models/quiz_modal.dart';
 import 'package:flutter_dev_quiz/shared/widgets/progress_indicator/progress_indicator_widget.dart';
 
 const MOCK_QUIZ_CARDS = ([
@@ -13,18 +14,17 @@ const MOCK_QUIZ_CARDS = ([
 ]);
 
 class QuizCardWidget extends StatelessWidget {
-  final String description;
-  final String category;
+  final QuizModel quiz;
+  final int total;
   QuizCardWidget({
     Key? key,
-    required this.description,
-    required this.category,
+    required this.quiz,
+    required this.total,
   }) : super(key: key);
-
-  String get image => AppImages.getImage(category);
 
   @override
   Widget build(BuildContext context) {
+    int questionAwnsered = quiz.questionAwnsered;
     return LimitedBox(
       maxWidth: 160,
       maxHeight: 177,
@@ -46,10 +46,11 @@ class QuizCardWidget extends StatelessWidget {
               Container(
                 width: 40,
                 height: 40,
-                child: Image.asset(image),
+                child: Image.asset(quiz.imagem),
               ),
               Text(
-                description,
+                quiz.title,
+                maxLines: 3,
                 style: AppTextStyles.heading15,
               ),
               Row(
@@ -59,12 +60,13 @@ class QuizCardWidget extends StatelessWidget {
                   Expanded(
                       flex: 2,
                       child: Text(
-                        "3 de 10",
+                        "$questionAwnsered de $total",
                         style: AppTextStyles.body11,
                       )),
                   Expanded(
                     flex: 2,
-                    child: ProgressIndicatorWidget(value: 0.3),
+                    child: ProgressIndicatorWidget(
+                        value: questionAwnsered / total),
                   ),
                 ],
               )

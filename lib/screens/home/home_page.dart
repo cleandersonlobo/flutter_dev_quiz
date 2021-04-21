@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/core/app_colors.dart';
+import 'package:flutter_dev_quiz/screens/home/home_controller.dart';
+import 'package:flutter_dev_quiz/screens/home/home_state.dart';
 import 'package:flutter_dev_quiz/screens/home/widgets/app_bar/app_bar_widget.dart';
 import 'package:flutter_dev_quiz/screens/home/widgets/level_button/level_button_widget.dart';
 import 'package:flutter_dev_quiz/screens/home/widgets/quiz_card/quiz_card_widget.dart';
@@ -12,10 +14,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = HomeController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.getUser();
+    controller.getQuizzes();
+    controller.stateNotifier.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (controller.state != HomeState.success) {
+      return Scaffold(
+        backgroundColor: AppColors.light,
+        body: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
-      appBar: AppBarWidget(),
+      appBar: AppBarWidget(user: controller.user),
       backgroundColor: AppColors.light,
       body: Container(
         child: Column(
@@ -36,10 +61,10 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
-              children: MOCK_QUIZ_CARDS
+              children: controller.quizzes!
                   .map((item) => QuizCardWidget(
-                        description: item['description']!,
-                        category: item['category']!,
+                        quiz: item,
+                        total: controller.quizzes!.length,
                       ))
                   .toList(),
             )),

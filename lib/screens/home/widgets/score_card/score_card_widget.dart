@@ -4,6 +4,8 @@ import 'package:flutter_dev_quiz/core/core.dart';
 import 'package:flutter_dev_quiz/screens/home/widgets/chart/chart_widget.dart';
 
 class ScoreCardWidget extends StatelessWidget {
+  final int score;
+  ScoreCardWidget({required this.score});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +21,7 @@ class ScoreCardWidget extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                child: ChartWidget(),
+                child: ChartWidget(score: score),
               ),
               Expanded(
                 flex: 3,
