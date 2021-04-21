@@ -81,8 +81,8 @@ class _ChallengePageState extends State<ChallengePage> {
             Expanded(
                 flex: 0,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: const EdgeInsets.only(
+                      right: 20, left: 20, bottom: 20, top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

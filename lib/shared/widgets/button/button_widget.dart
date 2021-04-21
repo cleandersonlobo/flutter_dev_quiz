@@ -40,8 +40,10 @@ class ButtonWidget extends StatelessWidget {
       child: Ink(
         decoration: BoxDecoration(
             color: buttonColor,
-            border: Border.fromBorderSide(BorderSide(
-                color: AppColors.border, width: variant == 'light' ? 1 : 0)),
+            border: variant != 'light'
+                ? null
+                : Border.fromBorderSide(
+                    BorderSide(color: AppColors.border, width: 1)),
             borderRadius: BorderRadius.circular(10)),
         child: InkWell(
           onTap: onPress,

@@ -19,11 +19,54 @@ class AwnserWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getColorAwnser() {
+      if (selected && !showAwnser || (showAwnser && isCorrect)) {
+        return {
+          "textStyle": AppTextStyles.bodyDarkGreen,
+          "container": AppColors.lightGreen,
+          "boder": AppColors.green,
+          "icon": showAwnser && isCorrect
+              ? Center(
+                  child: Icon(
+                  Icons.check,
+                  size: 15.0,
+                  color: Colors.white,
+                ))
+              : Container(),
+          "iconColor":
+              showAwnser && isCorrect ? AppColors.darkGreen : AppColors.white
+        };
+      }
+
+      if (selected && showAwnser && !isCorrect) {
+        return {
+          "textStyle": AppTextStyles.bodyDarkRed,
+          "container": AppColors.lightRed,
+          "boder": AppColors.red,
+          "iconColor": AppColors.darkRed,
+          "icon": Center(
+              child: Icon(
+            Icons.close,
+            size: 15.0,
+            color: Colors.white,
+          ))
+        };
+      }
+
+      return {
+        "textStyle": AppTextStyles.body,
+        "container": AppColors.white,
+        "boder": AppColors.border,
+        "iconColor": AppColors.white,
+        "icon": Container()
+      };
+    }
+
     return Ink(
       decoration: BoxDecoration(
-        color: selected ? AppColors.lightGreen : AppColors.white,
+        color: getColorAwnser()['container'] as Color,
         border: Border.fromBorderSide(BorderSide(
-          color: selected ? AppColors.green : AppColors.border,
+          color: getColorAwnser()['boder'] as Color,
         )),
         borderRadius: BorderRadius.circular(10),
       ),
@@ -39,9 +82,7 @@ class AwnserWidget extends StatelessWidget {
                   flex: 1,
                   child: Text(
                     text,
-                    style: selected
-                        ? AppTextStyles.bodyDarkGreen
-                        : AppTextStyles.body,
+                    style: getColorAwnser()['textStyle'] as TextStyle,
                   )),
               SizedBox(
                 width: 30,
@@ -53,20 +94,11 @@ class AwnserWidget extends StatelessWidget {
                   width: 24,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: showAwnser && isCorrect
-                          ? AppColors.darkGreen
-                          : AppColors.white,
+                      color: getColorAwnser()['iconColor'] as Color,
                       border: Border.all(
                           width: showAwnser && isCorrect ? 1 : 0,
                           color: AppColors.border)),
-                  child: showAwnser && isCorrect
-                      ? Center(
-                          child: Icon(
-                          Icons.check,
-                          size: 15.0,
-                          color: Colors.white,
-                        ))
-                      : Container(),
+                  child: getColorAwnser()['icon'] as Widget,
                 ),
               ),
             ],
