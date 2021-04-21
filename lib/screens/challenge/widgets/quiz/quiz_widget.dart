@@ -6,7 +6,7 @@ class QuizWidget extends StatelessWidget {
   final String title;
   final List<Map<String, Object>> questions;
   final onPressQuestion;
-  var indexSelected;
+  final int indexSelected;
   final bool showAwnser;
   QuizWidget({
     Key? key,
