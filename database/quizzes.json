@@ -6,7 +6,7 @@
     "level": "facil",
     "questions": [
       {
-        "title": "Flutter ou React Native?",
+        "title": "E ai? Flutter ou React Native?",
         "isAnswered": false,
         "awnsers": [
           {
@@ -14,15 +14,15 @@
             "isCorrect": true
           },
           {
-            "description": "Lógico que é o React Native",
+            "description": "Oxe! React Native sem dúvida",
             "isCorrect": true
           },
           {
-            "description": "Lógico que é o React Native",
+            "description": "Ainda pergunta? React Native!",
             "isCorrect": true
           },
           {
-            "description": "Flutter é o melhor",
+            "description": "Tu é doido ou cheira gás maxu? Flutter é o melhor!",
             "isCorrect": false
           }
         ]
@@ -146,7 +146,7 @@
         ]
       },
       {
-        "title": "1 - Flutter ou React Native?",
+        "title": "Flutter ou React Native?",
         "isAnswered": true,
         "awnsers": [
           {
@@ -162,7 +162,7 @@
             "isCorrect": true
           },
           {
-            "description": "Flutter é o melhor",
+            "description": "Tu é doido ou cheira gás? Flutter é o melhor",
             "isCorrect": false
           }
         ]
