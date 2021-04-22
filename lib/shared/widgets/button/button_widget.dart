@@ -34,30 +34,33 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      constraints: BoxConstraints(maxWidth: 164),
-      child: Ink(
-        decoration: BoxDecoration(
-            color: buttonColor,
-            border: variant != 'light'
-                ? null
-                : Border.fromBorderSide(
-                    BorderSide(color: AppColors.border, width: 1)),
-            borderRadius: BorderRadius.circular(10)),
-        child: InkWell(
-          onTap: onPress,
-          borderRadius: BorderRadius.circular(10),
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              child: Text(label,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.notoSans(
-                    fontWeight: FontWeight.w600,
-                    color: fontColor,
-                    fontSize: 13,
-                  )),
+    return Material(
+      type: MaterialType.transparency,
+      child: Container(
+        width: double.infinity,
+        constraints: BoxConstraints(maxWidth: 164),
+        child: Ink(
+          decoration: BoxDecoration(
+              color: buttonColor,
+              border: variant != 'light'
+                  ? null
+                  : Border.fromBorderSide(
+                      BorderSide(color: AppColors.border, width: 1)),
+              borderRadius: BorderRadius.circular(10)),
+          child: InkWell(
+            onTap: onPress,
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                child: Text(label,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.notoSans(
+                      fontWeight: FontWeight.w600,
+                      color: fontColor,
+                      fontSize: 13,
+                    )),
+              ),
             ),
           ),
         ),
