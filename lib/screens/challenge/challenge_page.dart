@@ -2,30 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/screens/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:flutter_dev_quiz/screens/challenge/widgets/quiz/quiz_widget.dart';
 import 'package:flutter_dev_quiz/core/app_colors.dart';
+import 'package:flutter_dev_quiz/shared/models/quiz_modal.dart';
 import 'package:flutter_dev_quiz/shared/widgets/button/button_widget.dart';
 
-const MOCK_QUIZ_QUESTION = ([
-  {
-    "description": "Kit de desenvolvimento de interface de usuário",
-    "isCorrect": false,
-  },
-  {
-    "description":
-        "Possibilita a criação de aplicativos compilados nativamente",
-    "isCorrect": true,
-  },
-  {
-    "description": "Acho que é uma marca de café do Himalaia",
-    "isCorrect": false,
-  },
-  {
-    "description": "Possibilita a criação de desktops que são muito incríveis",
-    "isCorrect": false,
-  },
-]);
-
 class ChallengePage extends StatefulWidget {
-  ChallengePage({Key? key}) : super(key: key);
+  final QuizModel quiz;
+  ChallengePage({Key? key, required this.quiz}) : super(key: key);
 
   @override
   _ChallengePageState createState() => _ChallengePageState();
@@ -33,6 +15,15 @@ class ChallengePage extends StatefulWidget {
 
 class _ChallengePageState extends State<ChallengePage> {
   bool showAwnser = false;
+  int currentQuestion = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      currentQuestion = widget.quiz.questionAwnsered + 1;
+    });
+  }
 
   var indexSelected;
 
@@ -54,10 +45,22 @@ class _ChallengePageState extends State<ChallengePage> {
 
   @override
   Widget build(BuildContext context) {
+    void skipQuestion() {
+      if (widget.quiz.questions.length > currentQuestion) {
+        setState(() {
+          currentQuestion = currentQuestion + 1;
+        });
+      }
+    }
+
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60),
-          child: SafeArea(child: QuestionIndicatorWidget()),
+          child: SafeArea(
+              child: QuestionIndicatorWidget(
+            currentQuestion: currentQuestion,
+            totalQuestions: widget.quiz.questions.length,
+          )),
         ),
         backgroundColor: AppColors.light,
         body: Column(
@@ -69,8 +72,8 @@ class _ChallengePageState extends State<ChallengePage> {
                 padding: EdgeInsets.all(20),
                 children: [
                   QuizWidget(
-                    title: "O que o Flutter faz em sua totalidade?",
-                    questions: MOCK_QUIZ_QUESTION,
+                    title: widget.quiz.questions[currentQuestion - 1].title,
+                    awnsers: widget.quiz.questions[currentQuestion - 1].awnsers,
                     showAwnser: showAwnser,
                     onPressQuestion: toggleAwnser,
                     indexSelected: indexSelected,
@@ -78,39 +81,40 @@ class _ChallengePageState extends State<ChallengePage> {
                 ],
               ),
             ),
-            Expanded(
-                flex: 0,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      right: 20, left: 20, bottom: 20, top: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: ButtonWidget(
-                          label: "Pular",
-                          variant: "light",
-                          onPress: () {},
-                        ),
+            Container(
+              color: AppColors.light,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    right: 20, left: 20, bottom: 20, top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      flex: 0,
+                      child: ButtonWidget(
+                        label: "Pular",
+                        variant: "light",
+                        onPress: skipQuestion,
                       ),
-                      Expanded(
-                        flex: 0,
-                        child: SizedBox(
-                          width: 8,
-                        ),
+                    ),
+                    Expanded(
+                      flex: 0,
+                      child: SizedBox(
+                        width: 8,
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: ButtonWidget(
-                          label: "Confirmar",
-                          variant: "primary",
-                          onPress: confirmAwnser,
-                        ),
-                      )
-                    ],
-                  ),
-                ))
+                    ),
+                    Expanded(
+                      flex: 0,
+                      child: ButtonWidget(
+                        label: "Confirmar",
+                        variant: "primary",
+                        onPress: confirmAwnser,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ));
   }

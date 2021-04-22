@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/screens/challenge/widgets/awnser/awnser_widget.dart';
 import 'package:flutter_dev_quiz/core/app_text_styles.dart';
+import 'package:flutter_dev_quiz/shared/models/awnser_mdoel.dart';
 
 class QuizWidget extends StatelessWidget {
   final String title;
-  final List<Map<String, Object>> questions;
+  final List<AwnserModel> awnsers;
   final onPressQuestion;
-  final int indexSelected;
+  final indexSelected;
   final bool showAwnser;
   QuizWidget({
     Key? key,
     required this.showAwnser,
     required this.title,
-    required this.questions,
+    required this.awnsers,
     required this.onPressQuestion,
-    required this.indexSelected,
+    this.indexSelected,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SafeArea(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: AppTextStyles.heading,
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              title,
+              textAlign: TextAlign.left,
+              style: AppTextStyles.heading,
+            ),
           ),
           SizedBox(
             height: 24,
@@ -32,7 +38,7 @@ class QuizWidget extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.all(10),
-              itemCount: questions.length,
+              itemCount: awnsers.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 8),
@@ -42,8 +48,8 @@ class QuizWidget extends StatelessWidget {
                       onPressQuestion(index);
                     },
                     showAwnser: showAwnser,
-                    isCorrect: (questions[index]['isCorrect']! as bool),
-                    text: (questions[index]['description']! as String),
+                    isCorrect: awnsers[index].isCorrect,
+                    text: awnsers[index].description,
                   ),
                 );
               }),
