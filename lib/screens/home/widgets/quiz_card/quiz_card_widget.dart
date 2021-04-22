@@ -15,16 +15,15 @@ const MOCK_QUIZ_CARDS = ([
 
 class QuizCardWidget extends StatelessWidget {
   final QuizModel quiz;
-  final int total;
   QuizCardWidget({
     Key? key,
     required this.quiz,
-    required this.total,
   }) : super(key: key);
-
+  String get image => AppImages.getImage(quiz.imagem);
   @override
   Widget build(BuildContext context) {
     int questionAwnsered = quiz.questionAwnsered;
+    int total = quiz.questions.length;
     return LimitedBox(
       maxWidth: 160,
       maxHeight: 177,
@@ -46,7 +45,7 @@ class QuizCardWidget extends StatelessWidget {
               Container(
                 width: 40,
                 height: 40,
-                child: Image.asset(quiz.imagem),
+                child: Image.asset(image),
               ),
               Text(
                 quiz.title,
@@ -66,7 +65,7 @@ class QuizCardWidget extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: ProgressIndicatorWidget(
-                        value: questionAwnsered / total),
+                        value: questionAwnsered / quiz.questions.length),
                   ),
                 ],
               )

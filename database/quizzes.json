@@ -1,8 +1,8 @@
 [
   {
     "title": "Flutter NLW - #01",
-    "image": "blocks",
-    "questionAnswered": 0, 
+    "imagem": "blocks",
+    "questionAwnsered": 0, 
     "level": "facil",
     "questions": [
       {
@@ -31,8 +31,8 @@
   },
   {
     "title": "Desafio RN - #99",
-    "image": "data",
-    "questionAnswered": 3, 
+    "imagem": "data",
+    "questionAwnsered": 3, 
     "level": "medio",
     "questions": [
       {
@@ -103,6 +103,7 @@
       },
       {
         "title": "1 - Flutter ou React Native?",
+        "isAnswered": true,
         "awnsers": [
           {
             "description": "Lógico que é o React Native",
@@ -124,6 +125,7 @@
       },
       {
         "title": "1 - Flutter ou React Native?",
+        "isAnswered": true,
         "awnsers": [
           {
             "description": "Lógico que é o React Native",
@@ -145,6 +147,7 @@
       },
       {
         "title": "1 - Flutter ou React Native?",
+        "isAnswered": true,
         "awnsers": [
           {
             "description": "Lógico que é o React Native",

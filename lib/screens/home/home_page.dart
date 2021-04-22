@@ -55,19 +55,23 @@ class _HomePageState extends State<HomePage> {
                     .toList(),
               ),
             ),
-            Expanded(
-                child: GridView.count(
-              crossAxisCount: 2,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              children: controller.quizzes!
-                  .map((item) => QuizCardWidget(
-                        quiz: item,
-                        total: controller.quizzes!.length,
-                      ))
-                  .toList(),
-            )),
+            controller.quizzes != null
+                ? Expanded(
+                    child: GridView.count(
+                        crossAxisCount: 2,
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        children: controller.quizzes!
+                            .map((item) => QuizCardWidget(
+                                  quiz: item,
+                                ))
+                            .toList()),
+                  )
+                : CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  ),
           ],
         ),
       ),
