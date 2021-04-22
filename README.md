@@ -1,16 +1,20 @@
-# flutter_dev_quiz
+# Dev.Quiz_
 
-A new Flutter project.
+Projeto desenvolvido na trilha de Flutter na NLW #05 provido pela Rocketseat.
 
-## Getting Started
+São cinco dias desenvolvendo uma aplicação de um Quiz.
 
-This project is a starting point for a Flutter application.
+## Figma
 
-A few resources to get you started if this is your first Flutter project:
+![layout](./screenshot/layout.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+# 3º dia - Preview 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Uma pequena prévia do que foi desenvolvido nas aulas até o 3º dia do evento.
+
+![preview-1](./screenshot/preview_1.gif)
+
+
+## Author
+
+*	[Cleanderson Lobo](https://www.linkedin.com/in/cleandersonlobo/)
