@@ -25,27 +25,30 @@ class LebelButtonWidget extends StatelessWidget {
   final BorderRadius borderRadius = BorderRadius.circular(28);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 2),
-      width: double.infinity,
-      constraints: BoxConstraints(maxWidth: 80),
-      child: Ink(
-        decoration: BoxDecoration(
-            color: color,
-            border: Border.fromBorderSide(BorderSide(color: borderColor)),
-            borderRadius: borderRadius),
-        child: InkWell(
-          onTap: onPress,
-          borderRadius: borderRadius,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6),
-            child: Text(label,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.notoSans(
-                  fontWeight: FontWeight.w500,
-                  color: fontColor,
-                  fontSize: 13,
-                )),
+    return Material(
+      type: MaterialType.transparency,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 2),
+        width: double.infinity,
+        constraints: BoxConstraints(maxWidth: 80),
+        child: Ink(
+          decoration: BoxDecoration(
+              color: color,
+              border: Border.fromBorderSide(BorderSide(color: borderColor)),
+              borderRadius: borderRadius),
+          child: InkWell(
+            onTap: onPress,
+            borderRadius: borderRadius,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              child: Text(label,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.notoSans(
+                    fontWeight: FontWeight.w500,
+                    color: fontColor,
+                    fontSize: 13,
+                  )),
+            ),
           ),
         ),
       ),

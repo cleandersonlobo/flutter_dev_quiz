@@ -20,54 +20,57 @@ class QuizCardWidget extends StatelessWidget {
       );
     }
 
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      constraints: BoxConstraints(maxWidth: 160, maxHeight: 177),
-      child: Ink(
-        decoration: BoxDecoration(
-            color: AppColors.white,
+    return Material(
+      type: MaterialType.transparency,
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        constraints: BoxConstraints(maxWidth: 160, maxHeight: 177),
+        child: Ink(
+          decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.fromBorderSide(
+                BorderSide(color: AppColors.border),
+              )),
+          child: InkWell(
+            onTap: onNavigateToChallenge,
             borderRadius: BorderRadius.circular(10),
-            border: Border.fromBorderSide(
-              BorderSide(color: AppColors.border),
-            )),
-        child: InkWell(
-          onTap: onNavigateToChallenge,
-          borderRadius: BorderRadius.circular(10),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  child: Image.asset(image),
-                ),
-                Text(
-                  quiz.title,
-                  maxLines: 3,
-                  style: AppTextStyles.heading15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    child: Image.asset(image),
+                  ),
+                  Text(
+                    quiz.title,
+                    maxLines: 3,
+                    style: AppTextStyles.heading15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          flex: 2,
+                          child: Text(
+                            "$questionAwnsered de $total",
+                            style: AppTextStyles.body11,
+                          )),
+                      Expanded(
                         flex: 2,
-                        child: Text(
-                          "$questionAwnsered de $total",
-                          style: AppTextStyles.body11,
-                        )),
-                    Expanded(
-                      flex: 2,
-                      child: ProgressIndicatorWidget(
-                          value: questionAwnsered / quiz.questions.length),
-                    ),
-                  ],
-                )
-              ],
+                        child: ProgressIndicatorWidget(
+                            value: questionAwnsered / quiz.questions.length),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBarWidget(user: controller.user),
       backgroundColor: AppColors.light,
       body: Container(
+        color: AppColors.light,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -51,7 +52,10 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: TYPES_LEVEL
-                    .map((label) => LebelButtonWidget(label: label))
+                    .map((label) => LebelButtonWidget(
+                          label: label,
+                          onPress: () {},
+                        ))
                     .toList(),
               ),
             ),
