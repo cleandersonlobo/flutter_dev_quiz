@@ -12,7 +12,6 @@ class RouteGenerator {
       case '/':
         return MaterialPageRoute(builder: (_) => HomePage());
       case '/challenge':
-        print(args.toString());
         if (args is QuizModel) {
           return MaterialPageRoute(
             builder: (_) => ChallengePage(

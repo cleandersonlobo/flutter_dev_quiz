@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/screens/challenge/widgets/awnser/awnser_widget.dart';
 import 'package:flutter_dev_quiz/core/app_text_styles.dart';
-import 'package:flutter_dev_quiz/shared/models/awnser_mdoel.dart';
+import 'package:flutter_dev_quiz/shared/models/question_model.dart';
 
 class QuizWidget extends StatelessWidget {
-  final String title;
-  final List<AwnserModel> awnsers;
+  final QuestionModel question;
+  final int currentQuestion;
   final onPressQuestion;
   final indexSelected;
   final bool showAwnser;
   QuizWidget({
     Key? key,
     required this.showAwnser,
-    required this.title,
-    required this.awnsers,
     required this.onPressQuestion,
+    required this.question,
+    required this.currentQuestion,
     this.indexSelected,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final isAnswered = question.isAnswered || showAwnser;
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +27,7 @@ class QuizWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              title,
+              question.title,
               textAlign: TextAlign.left,
               style: AppTextStyles.heading,
             ),
@@ -38,7 +39,7 @@ class QuizWidget extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.all(10),
-              itemCount: awnsers.length,
+              itemCount: question.awnsers.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 8),
@@ -47,9 +48,9 @@ class QuizWidget extends StatelessWidget {
                     onPress: () {
                       onPressQuestion(index);
                     },
-                    showAwnser: showAwnser,
-                    isCorrect: awnsers[index].isCorrect,
-                    text: awnsers[index].description,
+                    showAwnser: isAnswered,
+                    isCorrect: question.awnsers[index].isCorrect,
+                    text: question.awnsers[index].description,
                   ),
                 );
               }),

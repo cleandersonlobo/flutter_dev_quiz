@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/screens/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:flutter_dev_quiz/screens/challenge/widgets/quiz/quiz_widget.dart';
 import 'package:flutter_dev_quiz/core/app_colors.dart';
+import 'package:flutter_dev_quiz/shared/models/question_model.dart';
 import 'package:flutter_dev_quiz/shared/models/quiz_modal.dart';
 import 'package:flutter_dev_quiz/shared/widgets/button/button_widget.dart';
 
@@ -14,23 +15,23 @@ class ChallengePage extends StatefulWidget {
 }
 
 class _ChallengePageState extends State<ChallengePage> {
-  bool showAwnser = false;
+  // ignore: deprecated_member_use
+  var showAwnser = List.empty();
   int currentQuestion = 1;
-
+  var indexSelected;
   @override
   void initState() {
     super.initState();
     setState(() {
+      showAwnser = widget.quiz.questions.map((e) => e.isAnswered).toList();
       currentQuestion = widget.quiz.questionAwnsered + 1;
     });
   }
 
-  var indexSelected;
-
   void toggleAwnser(int index) {
-    if (!showAwnser) {
+    if (!showAwnser.elementAt(currentQuestion - 1)) {
       setState(() {
-        indexSelected = index == indexSelected ? null : index;
+        indexSelected = index == indexSelected ? 0 : index;
       });
     }
   }
@@ -38,7 +39,7 @@ class _ChallengePageState extends State<ChallengePage> {
   void confirmAwnser() {
     if (indexSelected >= 0) {
       setState(() {
-        showAwnser = true;
+        showAwnser[currentQuestion - 1] = true;
       });
     }
   }
@@ -48,11 +49,14 @@ class _ChallengePageState extends State<ChallengePage> {
     void skipQuestion() {
       if (widget.quiz.questions.length > currentQuestion) {
         setState(() {
+          indexSelected = null;
           currentQuestion = currentQuestion + 1;
         });
       }
     }
 
+    QuestionModel question = widget.quiz.questions[currentQuestion - 1];
+    bool currentShowAwnser = showAwnser.elementAt(currentQuestion - 1);
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60),
@@ -72,9 +76,9 @@ class _ChallengePageState extends State<ChallengePage> {
                 padding: EdgeInsets.all(20),
                 children: [
                   QuizWidget(
-                    title: widget.quiz.questions[currentQuestion - 1].title,
-                    awnsers: widget.quiz.questions[currentQuestion - 1].awnsers,
-                    showAwnser: showAwnser,
+                    question: question,
+                    currentQuestion: currentQuestion,
+                    showAwnser: currentShowAwnser,
                     onPressQuestion: toggleAwnser,
                     indexSelected: indexSelected,
                   )
@@ -90,7 +94,7 @@ class _ChallengePageState extends State<ChallengePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      flex: 0,
+                      flex: 1,
                       child: ButtonWidget(
                         label: "Pular",
                         variant: "light",
@@ -100,17 +104,20 @@ class _ChallengePageState extends State<ChallengePage> {
                     Expanded(
                       flex: 0,
                       child: SizedBox(
-                        width: 8,
+                        width:
+                            !question.isAnswered && !currentShowAwnser ? 8 : 0,
                       ),
                     ),
-                    Expanded(
-                      flex: 0,
-                      child: ButtonWidget(
-                        label: "Confirmar",
-                        variant: "primary",
-                        onPress: confirmAwnser,
-                      ),
-                    )
+                    !question.isAnswered && !currentShowAwnser
+                        ? Expanded(
+                            flex: 1,
+                            child: ButtonWidget(
+                              label: "Confirmar",
+                              variant: "primary",
+                              onPress: confirmAwnser,
+                            ),
+                          )
+                        : Container(),
                   ],
                 ),
               ),
