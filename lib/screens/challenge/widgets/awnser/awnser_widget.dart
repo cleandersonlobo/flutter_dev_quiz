@@ -7,6 +7,7 @@ class AwnserWidget extends StatelessWidget {
   final bool selected;
   final bool isCorrect;
   final bool showAwnser;
+  final bool showCorrectAwnser;
   final onPress;
   AwnserWidget({
     Key? key,
@@ -15,12 +16,13 @@ class AwnserWidget extends StatelessWidget {
     required this.isCorrect,
     required this.showAwnser,
     required this.onPress,
+    this.showCorrectAwnser = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     getColorAwnser() {
-      if (selected && !showAwnser || (showAwnser && isCorrect)) {
+      if (selected && !showAwnser || (selected && showAwnser && isCorrect)) {
         return {
           "textStyle": AppTextStyles.bodyDarkGreen,
           "container": AppColors.lightGreen,

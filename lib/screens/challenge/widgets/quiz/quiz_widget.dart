@@ -5,6 +5,7 @@ import 'package:flutter_dev_quiz/shared/models/question_model.dart';
 
 class QuizWidget extends StatelessWidget {
   final QuestionModel question;
+  final bool showCorrectAwnser;
   final int currentQuestion;
   final onPressQuestion;
   final indexSelected;
@@ -16,6 +17,7 @@ class QuizWidget extends StatelessWidget {
     required this.question,
     required this.currentQuestion,
     this.indexSelected,
+    this.showCorrectAwnser = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class QuizWidget extends StatelessWidget {
                     onPress: () {
                       onPressQuestion(index);
                     },
+                    showCorrectAwnser: showCorrectAwnser,
                     showAwnser: isAnswered,
                     isCorrect: question.awnsers[index].isCorrect,
                     text: question.awnsers[index].description,

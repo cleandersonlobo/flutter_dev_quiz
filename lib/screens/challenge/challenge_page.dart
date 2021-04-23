@@ -32,6 +32,7 @@ class _ChallengePageState extends State<ChallengePage> {
     if (!showAwnser.elementAt(currentQuestion - 1)) {
       setState(() {
         indexSelected = index == indexSelected ? 0 : index;
+        confirmAwnser();
       });
     }
   }
