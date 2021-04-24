@@ -133,8 +133,9 @@ class _ChallengePageState extends State<ChallengePage> {
                 if (!isLastQuestion)
                   Expanded(
                     flex: 1,
-                    child: ButtonWidget.light(
-                      label: isAwnsered ? "Próxima" : "Pular",
+                    child: ButtonWidget(
+                      label: isAwnsered ? "Avançar" : "Pular",
+                      variant: isAwnsered ? 'secondary' : 'light',
                       onPress: skipQuestion,
                     ),
                   ),

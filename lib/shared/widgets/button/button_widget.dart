@@ -35,7 +35,7 @@ class ButtonWidget extends StatelessWidget {
     },
     "secondary": {
       "text": AppColors.white,
-      "button": AppColors.primary,
+      "button": AppColors.purple,
     },
     "light": {
       "text": AppColors.lightGrey,
