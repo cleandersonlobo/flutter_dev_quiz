@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/screens/challenge/challenge_page.dart';
 import 'package:flutter_dev_quiz/screens/home/home_page.dart';
+import 'package:flutter_dev_quiz/screens/result/result_page.dart';
 import 'package:flutter_dev_quiz/screens/splash/splash_page.dart';
 import 'package:flutter_dev_quiz/shared/models/quiz_modal.dart';
 
@@ -22,8 +23,9 @@ class RouteGenerator {
             ),
           );
         }
-
         return _errorRoute();
+      case '/result':
+        return MaterialPageRoute(builder: (_) => ResultPage());
       default:
         return _errorRoute();
     }

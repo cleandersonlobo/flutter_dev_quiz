@@ -6,27 +6,42 @@ class ButtonWidget extends StatelessWidget {
   final VoidCallback onPress;
   final String label;
   final String variant;
-  ButtonWidget({
-    Key? key,
-    required this.label,
-    required this.onPress,
-    required this.variant,
-  })   : assert(['primary', "secondary", "light"].contains(variant)),
+  final double maxWidth;
+  ButtonWidget(
+      {Key? key,
+      required this.label,
+      required this.onPress,
+      required this.variant,
+      this.maxWidth = 164})
+      : assert(['primary', "secondary", "light"].contains(variant)),
         super(key: key);
 
-  ButtonWidget.primary({
-    required VoidCallback onPress,
-    required String label,
-  })   : this.variant = 'primary',
+  ButtonWidget.primary(
+      {required VoidCallback onPress,
+      required String label,
+      double maxWidth = 164})
+      : this.variant = 'primary',
         this.onPress = onPress,
-        this.label = label;
+        this.label = label,
+        this.maxWidth = maxWidth;
 
-  ButtonWidget.light({
+  ButtonWidget.light(
+      {required VoidCallback onPress,
+      required String label,
+      double maxWidth = 164})
+      : this.variant = 'light',
+        this.onPress = onPress,
+        this.label = label,
+        this.maxWidth = maxWidth;
+
+  ButtonWidget.secondary({
     required VoidCallback onPress,
     required String label,
-  })   : this.variant = 'light',
+    double maxWidth = 164,
+  })  : this.variant = 'secondary',
         this.onPress = onPress,
-        this.label = label;
+        this.label = label,
+        this.maxWidth = maxWidth;
 
   final buttonConfig = {
     "primary": {
@@ -52,7 +67,7 @@ class ButtonWidget extends StatelessWidget {
       type: MaterialType.transparency,
       child: Container(
         width: double.infinity,
-        constraints: BoxConstraints(maxWidth: 164),
+        constraints: BoxConstraints(maxWidth: maxWidth),
         child: Ink(
           decoration: BoxDecoration(
               color: buttonColor,
