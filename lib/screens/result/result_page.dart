@@ -5,6 +5,7 @@ import 'package:flutter_dev_quiz/shared/models/quiz_modal.dart';
 import 'package:flutter_dev_quiz/shared/models/result_model.dart';
 import 'package:flutter_dev_quiz/shared/widgets/button/button_widget.dart';
 import 'package:flutter_dev_quiz/shared/widgets/button_link/button_link_widget.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ResultPage extends StatelessWidget {
   final QuizModel quiz;
@@ -55,7 +56,13 @@ class ResultPage extends StatelessWidget {
               Column(
                 children: [
                   ButtonWidget.secondary(
-                      maxWidth: 240, label: "Compartilhar", onPress: () {}),
+                    maxWidth: 240,
+                    label: "Compartilhar",
+                    onPress: () {
+                      Share.share(
+                          "Dev.Quiz_ Resulado\n${quiz.title}\ncom ${result.hits} de ${quiz.questions.length} acertos");
+                    },
+                  ),
                   SizedBox(
                     height: 20,
                   ),
