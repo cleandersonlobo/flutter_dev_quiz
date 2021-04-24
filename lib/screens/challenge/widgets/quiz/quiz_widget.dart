@@ -8,7 +8,7 @@ class QuizWidget extends StatelessWidget {
   final bool showCorrectAwnser;
   final int currentQuestion;
   final onPressQuestion;
-  final indexSelected;
+  final selected;
   final bool showAwnser;
   QuizWidget({
     Key? key,
@@ -16,12 +16,12 @@ class QuizWidget extends StatelessWidget {
     required this.onPressQuestion,
     required this.question,
     required this.currentQuestion,
-    this.indexSelected,
+    this.selected,
     this.showCorrectAwnser = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final isAnswered = question.isAnswered || showAwnser;
+    final isAwnsered = question.isAwnsered || showAwnser;
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,12 +46,14 @@ class QuizWidget extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: AwnserWidget(
-                    selected: indexSelected == index,
+                    isSelected:
+                        selected == index || (question.awnsered == index),
                     onPress: () {
                       onPressQuestion(index);
                     },
+                    disabled: selected != null && selected >= 0,
                     showCorrectAwnser: showCorrectAwnser,
-                    showAwnser: isAnswered,
+                    showAwnser: isAwnsered,
                     isCorrect: question.awnsers[index].isCorrect,
                     text: question.awnsers[index].description,
                   ),

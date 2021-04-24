@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dev_quiz/screens/challenge/challenge_controller.dart';
+import 'package:flutter_dev_quiz/screens/challenge/models/control_awnsers_model.dart';
 import 'package:flutter_dev_quiz/screens/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:flutter_dev_quiz/screens/challenge/widgets/quiz/quiz_widget.dart';
 import 'package:flutter_dev_quiz/core/app_colors.dart';
@@ -15,130 +17,147 @@ class ChallengePage extends StatefulWidget {
 }
 
 class _ChallengePageState extends State<ChallengePage> {
-  // ignore: deprecated_member_use
-  var showAwnser = List.empty();
-  int currentQuestion = 1;
-  var indexSelected;
+  final controller = ChallengeController();
+  late ControlAwnsersModel controlAwnsers;
+  PageController pageController = PageController();
   @override
   void initState() {
     super.initState();
+    pageController = PageController(initialPage: widget.quiz.questionAwnsered);
+
     setState(() {
-      showAwnser = widget.quiz.questions.map((e) => e.isAnswered).toList();
-      currentQuestion = widget.quiz.questionAwnsered + 1;
+      controller.controlAwnsers = widget.quiz.questions
+          .map((e) => ControlAwnsersModel(
+              isAwnsered: e.isAwnsered, selected: e.awnsered))
+          .toList();
+      controller.currentQuestion = widget.quiz.questionAwnsered + 1;
+      controlAwnsers = controller.getControlAwnsers();
+    });
+
+    controller.controlAwnsersNotfifier.addListener(() {
+      setState(() {
+        controlAwnsers = controller.getControlAwnsers();
+      });
+    });
+
+    pageController.addListener(() {
+      if (pageController.page!.toInt() >= controller.currentQuestion) {
+        setState(() {
+          controller.currentQuestion = pageController.page!.toInt() + 1;
+        });
+      }
+    });
+
+    controller.currentQuestionNotfifier.addListener(() {
+      setState(() {
+        controlAwnsers = controller.getControlAwnsers();
+      });
     });
   }
 
-  void toggleAwnser(int index) {
-    if (!showAwnser.elementAt(currentQuestion - 1)) {
+  void skipQuestion() {
+    if (widget.quiz.questions.length > controller.currentQuestion) {
       setState(() {
-        indexSelected = index == indexSelected ? 0 : index;
-        confirmAwnser();
-      });
-    }
-  }
-
-  void confirmAwnser() {
-    if (indexSelected >= 0) {
-      setState(() {
-        showAwnser[currentQuestion - 1] = true;
+        pageController.nextPage(
+            duration: Duration(milliseconds: 200), curve: Curves.easeIn);
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    void skipQuestion() {
-      if (widget.quiz.questions.length > currentQuestion) {
-        setState(() {
-          indexSelected = null;
-          currentQuestion = currentQuestion + 1;
-        });
-      }
-    }
+    QuestionModel question =
+        widget.quiz.questions[controller.currentQuestion - 1];
+    bool isLastQuestion =
+        controller.currentQuestion == widget.quiz.questions.length;
+    bool isAwnsered = controlAwnsers.isAwnsered || question.isAwnsered;
 
-    QuestionModel question = widget.quiz.questions[currentQuestion - 1];
-    bool currentShowAwnser = showAwnser.elementAt(currentQuestion - 1);
-    bool isLastQuestion = currentQuestion == widget.quiz.questions.length;
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(86),
-          child: SafeArea(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 2),
-                child: IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              QuestionIndicatorWidget(
-                currentQuestion: currentQuestion,
-                totalQuestions: widget.quiz.questions.length,
-              ),
-            ],
-          )),
-        ),
-        backgroundColor: AppColors.light,
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(86),
+        child: SafeArea(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              flex: 1,
-              child: ListView(
-                padding: EdgeInsets.all(20),
-                children: [
-                  QuizWidget(
-                    question: question,
-                    currentQuestion: currentQuestion,
-                    showAwnser: currentShowAwnser,
-                    onPressQuestion: toggleAwnser,
-                    indexSelected: indexSelected,
-                  )
-                ],
+            Padding(
+              padding: EdgeInsets.only(left: 2),
+              child: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
             ),
-            Container(
-              color: AppColors.light,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    right: 20, left: 20, bottom: 20, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: ButtonWidget.light(
-                        label: "Pular",
-                        onPress: skipQuestion,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 0,
-                      child: SizedBox(
-                        width: isLastQuestion &&
-                                (currentShowAwnser || question.isAnswered)
-                            ? 8
-                            : 0,
-                      ),
-                    ),
-                    isLastQuestion && (currentShowAwnser || question.isAnswered)
-                        ? Expanded(
-                            flex: 1,
-                            child: ButtonWidget.primary(
-                              onPress: confirmAwnser,
-                              label: "Confirmar",
-                            ),
-                          )
-                        : Container(),
-                  ],
-                ),
+
+            /// escutar quando deve ser atualizado
+            ValueListenableBuilder<int>(
+              valueListenable: controller.currentQuestionNotfifier,
+              builder: (context, value, _) => QuestionIndicatorWidget(
+                currentQuestion: value,
+                totalQuestions: widget.quiz.questions.length,
               ),
-            )
+            ),
           ],
-        ));
+        )),
+      ),
+      backgroundColor: AppColors.light,
+      body: PageView(
+        physics: widget.quiz.questionAwnsered < widget.quiz.questions.length
+            ? NeverScrollableScrollPhysics()
+            : null,
+        controller: pageController,
+        children: widget.quiz.questions
+            .map((e) => ListView(
+                  padding: EdgeInsets.all(20),
+                  children: [
+                    QuizWidget(
+                      question: e,
+                      currentQuestion: controller.currentQuestion,
+                      showAwnser: controlAwnsers.isAwnsered,
+                      onPressQuestion: controller.toggleAwnser,
+                      selected: controlAwnsers.selected,
+                    )
+                  ],
+                ))
+            .toList(),
+      ),
+      bottomNavigationBar: SafeArea(
+        bottom: true,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ValueListenableBuilder<int>(
+            valueListenable: controller.currentQuestionNotfifier,
+            builder: (context, value, _) => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                if (!isLastQuestion)
+                  Expanded(
+                    flex: 1,
+                    child: ButtonWidget.light(
+                      label: isAwnsered ? "Próxima" : "Pular",
+                      onPress: skipQuestion,
+                    ),
+                  ),
+                if (isLastQuestion && isAwnsered)
+                  Expanded(
+                    flex: 0,
+                    child: SizedBox(width: 8),
+                  ),
+                if (isLastQuestion && isAwnsered)
+                  Expanded(
+                    flex: 1,
+                    child: ButtonWidget.primary(
+                      onPress: () {
+                        Navigator.pop(context);
+                      },
+                      label: "Concluir",
+                    ),
+                  )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

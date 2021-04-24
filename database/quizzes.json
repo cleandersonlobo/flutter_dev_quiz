@@ -7,7 +7,7 @@
     "questions": [
       {
         "title": "E ai? Flutter ou React Native?",
-        "isAnswered": false,
+        "isAwnsered": false,
         "awnsers": [
           {
             "description": "Lógico que é o React Native",
@@ -32,12 +32,13 @@
   {
     "title": "Desafio RN - #99",
     "imagem": "data",
-    "questionAwnsered": 0, 
+    "questionAwnsered": 1, 
     "level": "medio",
     "questions": [
       {
         "title": "1 - Flutter ou React Native?",
-        "isAnswered": true,
+        "isAwnsered": true,
+        "awnsered": 1,
         "awnsers": [
           {
             "description": "Lógico que é o React Native",
@@ -59,7 +60,7 @@
       },
       {
         "title": "2 - Flutter ou React Native?",
-        "isAnswered": false,
+        "isAwnsered": false,
         "awnsers": [
           {
             "description": "Lógico que é o React Native",
@@ -81,7 +82,7 @@
       },
       {
         "title": "100 - Flutter ou React Native?",
-        "isAnswered": false,
+        "isAwnsered": false,
         "awnsers": [
           {
             "description": "Lógico que é o React Native",
@@ -103,7 +104,7 @@
       },
       {
         "title": "17 - Flutter ou React Native?",
-        "isAnswered": false,
+        "isAwnsered": false,
         "awnsers": [
           {
             "description": "Lógico que é o React Native",
@@ -125,7 +126,7 @@
       },
       {
         "title": "99 - Flutter ou React Native?",
-        "isAnswered": false,
+        "isAwnsered": false,
         "awnsers": [
           {
             "description": "Lógico que é o React Native",
@@ -147,7 +148,7 @@
       },
       {
         "title": "3 - Flutter ou React Native?",
-        "isAnswered": false,
+        "isAwnsered": false,
         "awnsers": [
           {
             "description": "Lógico que é o React Native",
