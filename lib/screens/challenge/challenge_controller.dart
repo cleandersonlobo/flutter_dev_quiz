@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dev_quiz/shared/models/result_model.dart';
 import './models/control_awnsers_model.dart';
 
 class ChallengeController {
   final currentQuestionNotfifier = ValueNotifier<int>(1);
+  final result = ResultModel();
   int get currentQuestion => currentQuestionNotfifier.value;
   set currentQuestion(int value) => currentQuestionNotfifier.value = value;
 
@@ -26,7 +28,11 @@ class ChallengeController {
     controlAwnsers = controlAwnsers.toList();
   }
 
-  void toggleAwnser(int index) {
+  void toggleAwnser(int index, bool isCorrect) {
+    if (isCorrect)
+      result.hits++;
+    else
+      result.errors++;
     setSelectedAwnsers(index);
   }
 }

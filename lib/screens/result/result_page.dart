@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/core/app_images.dart';
 import 'package:flutter_dev_quiz/core/core.dart';
 import 'package:flutter_dev_quiz/shared/models/quiz_modal.dart';
+import 'package:flutter_dev_quiz/shared/models/result_model.dart';
 import 'package:flutter_dev_quiz/shared/widgets/button/button_widget.dart';
 import 'package:flutter_dev_quiz/shared/widgets/button_link/button_link_widget.dart';
 
 class ResultPage extends StatelessWidget {
   final QuizModel quiz;
+  final ResultModel result;
   const ResultPage({
     Key? key,
     required this.quiz,
+    required this.result,
   }) : super(key: key);
 
   @override
@@ -42,7 +45,8 @@ class ResultPage extends StatelessWidget {
                   SizedBox(
                     height: 6,
                   ),
-                  Text("com 6 de 10 acertos", style: AppTextStyles.body15),
+                  Text("com ${result.hits} de ${quiz.questions.length} acertos",
+                      style: AppTextStyles.body15),
                   SizedBox(
                     height: 6,
                   ),

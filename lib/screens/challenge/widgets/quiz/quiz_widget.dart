@@ -49,7 +49,7 @@ class QuizWidget extends StatelessWidget {
                     isSelected:
                         selected == index || (question.awnsered == index),
                     onPress: () {
-                      onPressQuestion(index);
+                      onPressQuestion(index, question.awnsers[index].isCorrect);
                     },
                     disabled: selected != null && selected >= 0,
                     showCorrectAwnser: showCorrectAwnser,

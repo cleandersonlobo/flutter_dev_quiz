@@ -19,12 +19,12 @@ class ChallengePage extends StatefulWidget {
 class _ChallengePageState extends State<ChallengePage> {
   final controller = ChallengeController();
   late ControlAwnsersModel controlAwnsers;
+  bool isUnlockScroll = false;
   PageController pageController = PageController();
   @override
   void initState() {
     super.initState();
     pageController = PageController(initialPage: widget.quiz.questionAwnsered);
-
     setState(() {
       controller.controlAwnsers = widget.quiz.questions
           .map((e) => ControlAwnsersModel(
@@ -37,11 +37,15 @@ class _ChallengePageState extends State<ChallengePage> {
     controller.controlAwnsersNotfifier.addListener(() {
       setState(() {
         controlAwnsers = controller.getControlAwnsers();
+        isUnlockScroll =
+            controller.currentQuestion == widget.quiz.questions.length &&
+                controlAwnsers.isAwnsered;
       });
     });
 
     pageController.addListener(() {
-      if (pageController.page!.toInt() >= controller.currentQuestion) {
+      if (pageController.page!.toInt() >= controller.currentQuestion ||
+          isUnlockScroll) {
         setState(() {
           controller.currentQuestion = pageController.page!.toInt() + 1;
         });
@@ -102,7 +106,8 @@ class _ChallengePageState extends State<ChallengePage> {
       ),
       backgroundColor: AppColors.light,
       body: PageView(
-        physics: widget.quiz.questionAwnsered < widget.quiz.questions.length
+        physics: widget.quiz.questionAwnsered < widget.quiz.questions.length &&
+                !isUnlockScroll
             ? NeverScrollableScrollPhysics()
             : null,
         controller: pageController,
@@ -110,13 +115,17 @@ class _ChallengePageState extends State<ChallengePage> {
             .map((e) => ListView(
                   padding: EdgeInsets.all(20),
                   children: [
-                    QuizWidget(
-                      question: e,
-                      currentQuestion: controller.currentQuestion,
-                      showAwnser: controlAwnsers.isAwnsered,
-                      onPressQuestion: controller.toggleAwnser,
-                      selected: controlAwnsers.selected,
-                    )
+                    ValueListenableBuilder<int>(
+                        valueListenable: controller.currentQuestionNotfifier,
+                        builder: (context, value, _) => QuizWidget(
+                              question: e,
+                              currentQuestion: value,
+                              showAwnser: controller
+                                  .controlAwnsers[value - 1].isAwnsered,
+                              onPressQuestion: controller.toggleAwnser,
+                              selected:
+                                  controller.controlAwnsers[value - 1].selected,
+                            ))
                   ],
                 ))
             .toList(),
@@ -151,7 +160,10 @@ class _ChallengePageState extends State<ChallengePage> {
                       onPress: () {
                         Navigator.of(context).pushReplacementNamed(
                           "/result",
-                          arguments: widget.quiz,
+                          arguments: {
+                            "quiz": widget.quiz,
+                            "result": controller.result
+                          },
                         );
                       },
                       label: "Concluir",
