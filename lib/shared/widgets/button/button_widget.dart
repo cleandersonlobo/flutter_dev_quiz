@@ -3,7 +3,7 @@ import 'package:flutter_dev_quiz/core/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
-  final onPress;
+  final VoidCallback onPress;
   final String label;
   final String variant;
   ButtonWidget({
@@ -13,6 +13,20 @@ class ButtonWidget extends StatelessWidget {
     required this.variant,
   })   : assert(['primary', "secondary", "light"].contains(variant)),
         super(key: key);
+
+  ButtonWidget.primary({
+    required VoidCallback onPress,
+    required String label,
+  })   : this.variant = 'primary',
+        this.onPress = onPress,
+        this.label = label;
+
+  ButtonWidget.light({
+    required VoidCallback onPress,
+    required String label,
+  })   : this.variant = 'light',
+        this.onPress = onPress,
+        this.label = label;
 
   final buttonConfig = {
     "primary": {

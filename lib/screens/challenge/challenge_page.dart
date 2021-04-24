@@ -58,13 +58,28 @@ class _ChallengePageState extends State<ChallengePage> {
 
     QuestionModel question = widget.quiz.questions[currentQuestion - 1];
     bool currentShowAwnser = showAwnser.elementAt(currentQuestion - 1);
+    bool isLastQuestion = currentQuestion == widget.quiz.questions.length;
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(60),
+          preferredSize: Size.fromHeight(86),
           child: SafeArea(
-              child: QuestionIndicatorWidget(
-            currentQuestion: currentQuestion,
-            totalQuestions: widget.quiz.questions.length,
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 2),
+                child: IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+              QuestionIndicatorWidget(
+                currentQuestion: currentQuestion,
+                totalQuestions: widget.quiz.questions.length,
+              ),
+            ],
           )),
         ),
         backgroundColor: AppColors.light,
@@ -96,26 +111,26 @@ class _ChallengePageState extends State<ChallengePage> {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: ButtonWidget(
+                      child: ButtonWidget.light(
                         label: "Pular",
-                        variant: "light",
                         onPress: skipQuestion,
                       ),
                     ),
                     Expanded(
                       flex: 0,
                       child: SizedBox(
-                        width:
-                            !question.isAnswered && !currentShowAwnser ? 8 : 0,
+                        width: isLastQuestion &&
+                                (currentShowAwnser || question.isAnswered)
+                            ? 8
+                            : 0,
                       ),
                     ),
-                    !question.isAnswered && !currentShowAwnser
+                    isLastQuestion && (currentShowAwnser || question.isAnswered)
                         ? Expanded(
                             flex: 1,
-                            child: ButtonWidget(
-                              label: "Confirmar",
-                              variant: "primary",
+                            child: ButtonWidget.primary(
                               onPress: confirmAwnser,
+                              label: "Confirmar",
                             ),
                           )
                         : Container(),
