@@ -10,7 +10,9 @@ class HomeController {
   HomeState get state => stateNotifier.value;
 
   UserModel? user;
+  String? level;
   List<QuizModel>? quizzes;
+  List<QuizModel>? rawQuizzes;
   final repository = HomeRepository();
   void getUser() async {
     user = await repository.getUser();
@@ -19,6 +21,22 @@ class HomeController {
   void getQuizzes() async {
     state = HomeState.loading;
     quizzes = await repository.getQuizzes();
+    rawQuizzes = quizzes;
     state = HomeState.success;
+  }
+
+  void filterQuizzes(String value) {
+    if (value == level) {
+      level = null;
+      quizzes = rawQuizzes;
+    } else {
+      var list = rawQuizzes
+          ?.where((element) => element.level.toString().contains(value))
+          .toList();
+      if (list != null && list.isNotEmpty) {
+        quizzes = list;
+      }
+      level = value;
+    }
   }
 }

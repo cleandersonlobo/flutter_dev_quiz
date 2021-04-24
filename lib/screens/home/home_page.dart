@@ -51,10 +51,16 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: TYPES_LEVEL
-                    .map((label) => LebelButtonWidget(
-                          label: label,
-                          onPress: () {},
+                children: MAP_TYPES_LEVEL
+                    .map((level) => LebelButtonWidget(
+                          label: level['label']!,
+                          level: level['key']!,
+                          isSelected: level['key']! == controller.level,
+                          onPress: () {
+                            setState(() {
+                              controller.filterQuizzes(level['key']!);
+                            });
+                          },
                         ))
                     .toList(),
               ),

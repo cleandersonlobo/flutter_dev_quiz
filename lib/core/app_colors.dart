@@ -61,6 +61,36 @@ class AppColors {
     "fontColor": AppColors.levelButtonTextPerito
   };
 
+  static final levelButtonSelectedConfig = {
+    "color": AppColors.white,
+    "boderColor": AppColors.lightGrey,
+    "fontColor": AppColors.black
+  };
+
+  static Map<String, dynamic> getLevelNotSelectConfig(String key) {
+    var config = levelButtonSelectedConfig;
+    switch (key) {
+      case 'facil':
+        config['fontColor'] = AppColors.levelButtonTextFacil;
+        config['boderColor'] = AppColors.levelButtonBorderFacil;
+        return config;
+      case 'medio':
+        config['fontColor'] = AppColors.levelButtonTextMedio;
+        config['boderColor'] = AppColors.levelButtonBorderMedio;
+        return config;
+      case 'dificil':
+        config['fontColor'] = AppColors.levelButtonTextDificil;
+        config['boderColor'] = AppColors.levelButtonBorderDificil;
+        return config;
+      case 'perito':
+        config['fontColor'] = AppColors.levelButtonTextPerito;
+        config['boderColor'] = AppColors.levelButtonBorderPerito;
+        return config;
+      default:
+        return levelButtonSelectedConfig;
+    }
+  }
+
   //Button
   static final Color primary = Color(0xFF04D361);
   static final Color secondary = Color(0xFF04D361);
