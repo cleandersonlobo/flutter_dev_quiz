@@ -149,7 +149,10 @@ class _ChallengePageState extends State<ChallengePage> {
                     flex: 1,
                     child: ButtonWidget.primary(
                       onPress: () {
-                        Navigator.of(context).pushReplacementNamed("/result");
+                        Navigator.of(context).pushReplacementNamed(
+                          "/result",
+                          arguments: widget.quiz,
+                        );
                       },
                       label: "Concluir",
                     ),

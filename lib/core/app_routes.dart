@@ -25,7 +25,9 @@ class RouteGenerator {
         }
         return _errorRoute();
       case '/result':
-        return MaterialPageRoute(builder: (_) => ResultPage());
+        final quiz = settings.arguments;
+        return MaterialPageRoute(
+            builder: (_) => ResultPage(quiz: quiz as QuizModel));
       default:
         return _errorRoute();
     }

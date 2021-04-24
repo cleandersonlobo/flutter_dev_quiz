@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/core/app_images.dart';
 import 'package:flutter_dev_quiz/core/core.dart';
+import 'package:flutter_dev_quiz/shared/models/quiz_modal.dart';
 import 'package:flutter_dev_quiz/shared/widgets/button/button_widget.dart';
+import 'package:flutter_dev_quiz/shared/widgets/button_link/button_link_widget.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({Key? key}) : super(key: key);
+  final QuizModel quiz;
+  const ResultPage({
+    Key? key,
+    required this.quiz,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: Scrollbar(
           child: Column(
@@ -31,8 +38,7 @@ class ResultPage extends StatelessWidget {
                   SizedBox(
                     height: 6,
                   ),
-                  Text("Gerencimento de Estado",
-                      style: AppTextStyles.body15Bold),
+                  Text(quiz.title, style: AppTextStyles.body15Bold),
                   SizedBox(
                     height: 6,
                   ),
@@ -49,14 +55,12 @@ class ResultPage extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        "Voltar ao inicio",
-                        style: AppTextStyles.body15Bold,
-                      ))
+                  ButtonLinkWidget(
+                    text: "Voltar ao inicio",
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
                 ],
               )
             ],
