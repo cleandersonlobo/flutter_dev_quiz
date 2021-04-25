@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev_quiz/core/app_routes.dart';
-//import 'package:flutter_dev_quiz/screens/challenge/challenge_page.dart';
+import 'package:flutter_dev_quiz/core/core.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -10,6 +10,12 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
+      theme: ThemeData(
+        primaryColor: AppColors.primary,
+        backgroundColor: AppColors.light,
+        appBarTheme: AppBarTheme(brightness: Brightness.dark),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
     );
   }
 }

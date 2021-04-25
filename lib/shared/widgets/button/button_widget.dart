@@ -7,6 +7,7 @@ class ButtonWidget extends StatelessWidget {
   final String label;
   final String variant;
   final double maxWidth;
+  final bool animation;
   final bool isLoading;
   ButtonWidget({
     Key? key,
@@ -15,6 +16,7 @@ class ButtonWidget extends StatelessWidget {
     required this.variant,
     this.maxWidth = 164,
     this.isLoading = false,
+    this.animation = false,
   })  : assert(['primary', "secondary", "light", "dark"].contains(variant)),
         super(key: key);
 
@@ -26,6 +28,7 @@ class ButtonWidget extends StatelessWidget {
         this.onPress = onPress,
         this.label = label,
         this.isLoading = false,
+        this.animation = false,
         this.maxWidth = maxWidth;
 
   ButtonWidget.light(
@@ -36,6 +39,7 @@ class ButtonWidget extends StatelessWidget {
         this.onPress = onPress,
         this.label = label,
         this.isLoading = false,
+        this.animation = false,
         this.maxWidth = maxWidth;
 
   ButtonWidget.secondary({
@@ -45,6 +49,7 @@ class ButtonWidget extends StatelessWidget {
   })  : this.variant = 'secondary',
         this.onPress = onPress,
         this.label = label,
+        this.animation = false,
         this.isLoading = false,
         this.maxWidth = maxWidth;
 
@@ -113,6 +118,12 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!animation) {
+      return Material(
+        type: MaterialType.transparency,
+        child: _buttonWidget(),
+      );
+    }
     return Material(
       type: MaterialType.transparency,
       child: AnimatedSwitcher(
@@ -120,10 +131,8 @@ class ButtonWidget extends StatelessWidget {
         transitionBuilder: (Widget child, Animation<double> animation) {
           return FadeTransition(child: child, opacity: animation);
         },
-        child: Container(
-          key: ValueKey<bool>(isLoading),
-          child: isLoading ? _isLoadingWidget() : _buttonWidget(),
-        ),
+        key: ValueKey<bool>(isLoading),
+        child: isLoading ? _isLoadingWidget() : _buttonWidget(),
       ),
     );
   }
