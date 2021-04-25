@@ -42,10 +42,24 @@ class QuizCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    child: Image.asset(image),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 40,
+                        child: Image.asset(image),
+                      ),
+                      Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                            color: AppColors.getLevelNotSelectConfig(
+                                quiz.level.parse.toString())['boderColor'],
+                            borderRadius: BorderRadius.circular(16)),
+                      )
+                    ],
                   ),
                   Text(
                     quiz.title,

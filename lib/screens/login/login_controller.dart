@@ -17,7 +17,8 @@ class LoginController {
       var response = await http.get(Uri.https('api.github.com', 'users/$name'));
       Map map = Map<String, dynamic>.from(json.decode(response.body));
       if (response.statusCode != 200) throw response;
-      user = UserModel(name: map['name'], photoUrl: map['avatar_url']);
+      user =
+          UserModel(name: map['name'], photoUrl: map['avatar_url'], score: 100);
       afterSuccess();
     } catch (e) {
       print(e);
@@ -27,6 +28,6 @@ class LoginController {
 
   createUserByName(String name) async {
     state = LoginState.loading;
-    user = UserModel(name: name, photoUrl: "");
+    user = UserModel(name: name, photoUrl: "", score: 100);
   }
 }

@@ -16,8 +16,8 @@ class _ChartWidgetState extends State<ChartWidget>
   late Animation<double> _animation;
 
   void _initAnimation() {
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 800));
+    _controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1000));
     _animation = Tween<double>(begin: 0.0, end: widget.score.toDouble())
         .animate(_controller);
     _controller.forward();
@@ -44,7 +44,7 @@ class _ChartWidgetState extends State<ChartWidget>
                   width: 80,
                   child: CircularProgressIndicator(
                     strokeWidth: 10,
-                    value: widget.score / 100,
+                    value: _animation.value.toDouble() / 100,
                     backgroundColor: AppColors.chartSecondary,
                     valueColor:
                         AlwaysStoppedAnimation<Color>(AppColors.chartPrimary),
