@@ -3,26 +3,92 @@
     "title": "Flutter NLW - #01",
     "imagem": "blocks",
     "questionAwnsered": 0, 
-    "level": "facil",
+    "level": "perito",
     "questions": [
       {
-        "title": "E ai? Flutter ou React Native?",
+        "title": "What’s a difference between stateless and stateful widgets?",
         "isAwnsered": false,
         "awnsers": [
           {
-            "description": "Lógico que é o React Native",
+            "description": "Stateless widgets have their state created only once — therefore, the build method is called only once as well.",
+            "isCorrect": false
+          },
+          {
+            "description": "Stateful widgets have their state explicitly created, and it can be modified during the lifetime of the widget.",
+            "isCorrect": false
+          },
+          {
+            "description": "Stateless widgets have their state created only once — therefore, the build method is called only once as well.\n\nStateful widgets have their state explicitly created, and it can be modified during the lifetime of the widget.",
             "isCorrect": true
           },
           {
-            "description": "Oxe! React Native sem dúvida",
+            "description": "Stateless widgets have their state created only once.",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "title": "If you created a Flutter app using the Firebase services where the app users had to login to this App using Firebase user accounts (email and password), which of the following Firebase products store these app users' accounts?",
+        "isAwnsered": false,
+        "awnsers": [
+          {
+            "description": "Database",
+            "isCorrect": false
+          },
+          {
+            "description": "Authentication",
             "isCorrect": true
           },
           {
-            "description": "Tu é doido ou cheira gás maxu? Flutter é o melhor!",
+            "description": "Storage",
+            "isCorrect": false
+          },
+          {
+            "description": "Hosting",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "title": "This Flutter widget is used to toggle the on/off state of a single setting. Which of the following choices represents this definition?",
+        "isAwnsered": false,
+        "awnsers": [
+          {
+            "description": "onOff Widget",
+            "isCorrect": false
+          },
+          {
+            "description": "SlideA Widget",
+            "isCorrect": false
+          },
+          {
+            "description": "noYes Widget",
             "isCorrect": true
           },
           {
-            "description": " Esquece os dois. PHP é vida! ;)",
+            "description": "Switch Widget",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "title": "How many child widgets can be added to the Container widget?",
+        "isAwnsered": false,
+        "awnsers": [
+          {
+            "description": "Unlimited children widgets",
+            "isCorrect": false
+          },
+          {
+            "description": "Only one child widget",
+            "isCorrect": true
+          },
+          {
+            "description": "Two children widgets",
+            "isCorrect": false
+          },
+          {
+            "description": "Three children widgets",
             "isCorrect": false
           }
         ]
@@ -85,7 +151,7 @@
     "title": "Pre-Flutter NLW99 - #100",
     "imagem": "laptop",
     "questionAwnsered": 0, 
-    "level": "perito",
+    "level": "facil",
     "questions": [
       {
         "title": "E ai? Flutter ou React Native?",

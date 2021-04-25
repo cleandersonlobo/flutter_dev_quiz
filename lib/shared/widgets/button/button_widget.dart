@@ -13,7 +13,7 @@ class ButtonWidget extends StatelessWidget {
       required this.onPress,
       required this.variant,
       this.maxWidth = 164})
-      : assert(['primary', "secondary", "light"].contains(variant)),
+      : assert(['primary', "secondary", "light", "dark"].contains(variant)),
         super(key: key);
 
   ButtonWidget.primary(
@@ -56,6 +56,10 @@ class ButtonWidget extends StatelessWidget {
       "text": AppColors.lightGrey,
       "button": AppColors.white,
     },
+    "dark": {
+      "text": AppColors.white,
+      "button": AppColors.black,
+    }
   };
 
   Color get buttonColor => buttonConfig[variant]!['button']!;

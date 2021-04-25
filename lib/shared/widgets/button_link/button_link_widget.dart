@@ -4,11 +4,10 @@ import 'package:flutter_dev_quiz/core/core.dart';
 class ButtonLinkWidget extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
-  const ButtonLinkWidget({
-    Key? key,
-    required this.text,
-    this.onPressed,
-  }) : super(key: key);
+  final String variant;
+  const ButtonLinkWidget(
+      {Key? key, required this.text, this.onPressed, this.variant = 'dark'})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,9 @@ class ButtonLinkWidget extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: AppTextStyles.body15Bold,
+          style: variant == 'dark'
+              ? AppTextStyles.body15Bold
+              : AppTextStyles.body15White,
         ));
   }
 }
