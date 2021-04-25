@@ -29,18 +29,18 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    void navigateToHome() {
+      Navigator.of(context)
+          .pushReplacementNamed("/home", arguments: controller.user);
+    }
+
     void onSubmitted() async {
       FocusManager.instance.primaryFocus?.unfocus();
       if (isGithubUser) {
-        await controller.fetchGitHubUser(_textController.text);
-        if (controller.state == LoginState.success) {
-          Navigator.of(context)
-              .pushReplacementNamed("/home", arguments: controller.user);
-        }
+        await controller.fetchGitHubUser(_textController.text, navigateToHome);
       } else {
         await controller.createUserByName(_textController.text);
-        Navigator.of(context)
-            .pushReplacementNamed("/home", arguments: controller.user);
+        navigateToHome();
       }
     }
 

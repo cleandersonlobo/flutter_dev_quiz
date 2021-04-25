@@ -11,14 +11,14 @@ class LoginController {
   LoginState get state => stateNotifier.value;
   late UserModel user;
 
-  Future fetchGitHubUser(String name) async {
+  Future fetchGitHubUser(String name, VoidCallback afterSuccess) async {
     state = LoginState.loading;
     try {
       var response = await http.get(Uri.https('api.github.com', 'users/$name'));
       Map map = Map<String, dynamic>.from(json.decode(response.body));
       if (response.statusCode != 200) throw response;
       user = UserModel(name: map['name'], photoUrl: map['avatar_url']);
-      state = LoginState.success;
+      afterSuccess();
     } catch (e) {
       print(e);
       state = LoginState.error;
