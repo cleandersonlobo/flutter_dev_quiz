@@ -14,13 +14,16 @@ class HomeController {
   List<QuizModel>? quizzes;
   List<QuizModel>? rawQuizzes;
   final repository = HomeRepository();
-  void getUser() async {
-    user = await repository.getUser();
+  getUser() async {
+    if (user == null) {
+      user = await repository.getUser();
+    }
   }
 
   void getQuizzes() async {
     state = HomeState.loading;
     quizzes = await repository.getQuizzes();
+    await getUser();
     rawQuizzes = quizzes;
     state = HomeState.success;
   }

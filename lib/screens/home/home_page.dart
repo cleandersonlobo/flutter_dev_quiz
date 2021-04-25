@@ -5,9 +5,11 @@ import 'package:flutter_dev_quiz/screens/home/home_state.dart';
 import 'package:flutter_dev_quiz/screens/home/widgets/app_bar/app_bar_widget.dart';
 import 'package:flutter_dev_quiz/screens/home/widgets/level_button/level_button_widget.dart';
 import 'package:flutter_dev_quiz/screens/home/widgets/quiz_card/quiz_card_widget.dart';
+import 'package:flutter_dev_quiz/shared/models/user_model.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  final UserModel? user;
+  HomePage({Key? key, this.user}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -19,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    controller.getUser();
+    controller.user = widget.user;
     controller.getQuizzes();
     controller.stateNotifier.addListener(() {
       setState(() {});
