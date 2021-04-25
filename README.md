@@ -1,7 +1,7 @@
 
 <p align="center">
   <a href="https://flutter.io/">
-    <img src="./assets/images/logo.png" alt="Logo"  height=200>
+    <img src="./assets/images/small_logo.png" alt="Logo"  height=200>
   </a>
 
 
