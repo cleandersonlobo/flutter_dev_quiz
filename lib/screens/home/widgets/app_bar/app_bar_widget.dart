@@ -6,7 +6,8 @@ import 'package:flutter_dev_quiz/shared/models/user_model.dart';
 
 class AppBarWidget extends PreferredSize {
   final UserModel? user;
-  AppBarWidget({required this.user})
+  final onImageTap;
+  AppBarWidget({required this.user, this.onImageTap})
       : super(
             preferredSize: Size.fromHeight(250),
             child: Container(
@@ -30,13 +31,17 @@ class AppBarWidget extends PreferredSize {
                                     text: user?.name ?? "Usuário",
                                     style: AppTextStyles.titleBold)
                               ])),
-                          Container(
-                            width: 58,
-                            height: 58,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                    image: NetworkImage(user?.photoUrl ?? ""))),
+                          GestureDetector(
+                            onDoubleTap: onImageTap,
+                            child: Container(
+                              width: 58,
+                              height: 58,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                      image:
+                                          NetworkImage(user?.photoUrl ?? ""))),
+                            ),
                           )
                         ],
                       ),

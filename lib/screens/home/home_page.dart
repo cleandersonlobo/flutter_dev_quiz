@@ -42,7 +42,12 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
-      appBar: AppBarWidget(user: controller.user),
+      appBar: AppBarWidget(
+        user: controller.user,
+        onImageTap: () {
+          Navigator.of(context).pushReplacementNamed("/login");
+        },
+      ),
       backgroundColor: AppColors.light,
       body: Container(
         color: AppColors.light,
