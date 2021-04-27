@@ -20,7 +20,7 @@
 
 
 # Fluxo Login - Adicional
-Foi adicionado ao projeto, um fluxo de login após SplashScreen, com a possivilidade de carregar usuário pela API do Github ou usando o nome.
+Fluxo de login após SplashScreen, com integração com API do Github.
 
 - Login pelo usuário do Github (API);
 - Login pelo nome (sem foto);
